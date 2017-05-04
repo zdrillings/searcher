@@ -1,16 +1,21 @@
-package com.hardtofind.resources;
+package com.hardToFind.resources;
 
 import com.codahale.metrics.annotation.Timed;
-import com.hardtofind.models.SearchResult;
+import org.jooq.DSLContext;
+import org.jooq.Record;
+import org.jooq.Result;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
+
+import static org.jooq.impl.DSL.table;
 
 
 @Path("/search")
@@ -18,16 +23,30 @@ import java.util.concurrent.atomic.AtomicLong;
 public class SearchResource {
 
     private final AtomicLong counter;
+   // private AppConfiguration configuration;
 
     public SearchResource() {
+       // this.configuration = configuration;
         this.counter = new AtomicLong();
     }
 
     @GET
     @Timed
-    public SearchResult lookup(@QueryParam("name")  String name) {
-        final List<String> value = Arrays.asList(new String[]{name});
-        return new SearchResult(counter.incrementAndGet(), value);
+    public List<String> lookup(@QueryParam("query")  String query, @Context DSLContext database) {
+
+        //EbaySearcher ebaySearcher = new EbaySearcher(configuration.getEbayToken(), configuration.getEbayHost());
+        //final List<SearchResultItem> value = ebaySearcher.search("test");
+        //final List<SearchResultItem> value = Arrays.asList(new SearchResultItem[]{new SearchResultItem()});
+
+        Result<Record> results = database.selectFrom(table("job_configuration.users")).fetch();
+        List<String> value = new ArrayList<>();
+        for(Record record:results){
+            String email = record.get("email").toString();
+            int id = Integer.parseInt(record.get("id").toString());
+            value.add(email + "--" + id);
+        }
+
+        return value;
     }
 
 
