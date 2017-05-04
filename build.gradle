@@ -31,6 +31,8 @@ dependencies {
     compile 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.8.5'
     compile 'com.bendb.dropwizard:dropwizard-jooq:1.1.0-0'
     compile 'postgresql:postgresql:9.1-901-1.jdbc4'
+    compile group: 'javax.persistence', name: 'persistence-api', version: '1.0'
+
 }
 
 
