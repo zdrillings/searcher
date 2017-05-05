@@ -47,4 +47,13 @@ public class UserService {
         database.delete(table(table)).where(field("id").eq(id)).execute();
         return true;
     }
+
+    public boolean setUserValidated(int id){
+        int rowsUpdated = database.update(table(table))
+                .set(field("validated"),true)
+                .where(field("id").eq(id))
+                .execute();
+        if(rowsUpdated==1) return true;
+        return false;
+    }
 }

@@ -52,6 +52,7 @@ public class JobService {
                 .set(field("user_id"),job.userId)
                 .set(field("search_type_id"),job.searchTypeId)
                 .set(field("report_cadence_id"),job.reportCadenceId)
+                .where("id", job.id)
                 .returning(field("id"), field("search_string"), field("search_type_id"), field("report_cadence_id"))
                 .fetch()
                 .into(Job.class);
