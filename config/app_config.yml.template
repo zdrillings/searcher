@@ -30,11 +30,11 @@ database:
   # the name of your JDBC driver
   driverClass: org.postgresql.Driver
   # the username
-  user: zdrillings
+  user: XXXX
   # the password
-  password: phiordie1878
+  password: XXXXX
   # the JDBC URL
-  url: jdbc:postgresql://rhaegal.zdrillings.com/searcher
+  url: jdbc:postgresql://XXXXXX.com/searcher
   # any properties specific to your JDBC driver:
   properties:
     charSet: UTF-8

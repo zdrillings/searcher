@@ -1,6 +1,7 @@
 *.class
 .idea/
 build/
+app_config.yml
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
